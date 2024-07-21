@@ -4,7 +4,7 @@ echo
 echo "1 - Ubuntu 22.04"
 echo "2 - Alma Linux 9 (Version minimal)"
 echo
-read -p "Qu'elle est votre version ?" osversion
+read -p "Qu'elle est votre version ?" -n 1 -r osversion
 echo
 echo
 echo "[[[   - Préparation et récupération des scripts -   ]]]"
