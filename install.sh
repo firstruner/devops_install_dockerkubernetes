@@ -16,7 +16,7 @@ if [[ $osversion = 1 ]]; then
 else
   script_dir="AlmaLinux_9"
   dnf update -y
-  sudo apt-get install git gparted -y
+  sudo dnf install git parted -y
 fi
 echo
 echo "[[[   - Récupération de Git -   ]]]"
