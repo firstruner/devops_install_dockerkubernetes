@@ -1,8 +1,19 @@
 clear
+echo
+echo "[[[   - Verification systeme -   ]]]"
+echo
+cpucount=$((lscpu | egrep 'Processeur' | awk -F: '{print $2}') | sed 's/^[ \t]*//;s/[ \t]*$//')
+if [[ $cpucount -gt 1 ]]; then
+   echo "Votre machine a le nombre minimal de CPU requis"
+else
+   echo "Installtation stoppée : Votre machine ne dispose pas de 2 CPU !"
+   exit 1;
+fi
+echo
 echo "[[[   - Version de votre OS -   ]]]"
 echo
 echo "1 - Ubuntu 22.04"
-echo "2 - Alma Linux 9 (Version minimal)"
+echo "2 - Alma Linux 8/9 (Version minimale)"
 echo
 read -p "Qu'elle est votre version ?" -n 1 -r osversion
 echo
