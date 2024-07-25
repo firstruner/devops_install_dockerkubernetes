@@ -2,7 +2,7 @@ clear
 echo
 echo "[[[   - Verification systeme -   ]]]"
 echo
-cpucount=$((lscpu | egrep 'Processeur' | awk -F: '{print $2}') | sed 's/^[ \t]*//;s/[ \t]*$//')
+cpucount=$((lscpu | egrep 'Processeur|CPU' | awk -F: '{print $2}') | sed 's/^[ \t]*//;s/[ \t]*$//')
 if [[ $cpucount -gt 1 ]]; then
    echo "Votre machine a le nombre minimal de CPU requis"
 else
