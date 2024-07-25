@@ -2,6 +2,14 @@ clear
 echo
 echo "[[[   - Verification systeme -   ]]]"
 echo
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+BLUE='\033[0;34m'
+MAGENTA='\033[0;35m'
+CYAN='\033[0;36m'
+WHITE='\033[0;37m'
+NC='\033[0m'
 cpucount=$((lscpu | egrep 'Processeur\(s\)|CPU\(s\)' | awk -F: '{print $2}' | head -n 1) | sed 's/^[ \t]*//;s/[ \t]*$//')
 if [[ $cpucount -gt 1 ]]; then
    echo "Votre machine a le nombre minimal de CPU requis"
@@ -37,4 +45,13 @@ git clone https://github.com/firstruner/scripts_devops.git
 cd scripts_devops
 export script_dir
 export osversion
+export cpucount
+export RED
+export GREEN
+export YELLOW
+export BLUE
+export MAGENTA
+export CYAN
+export WHITE
+export NC
 bash install.sh
