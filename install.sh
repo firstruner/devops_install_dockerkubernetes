@@ -7,6 +7,8 @@ MAGENTA='\033[0;35m'
 CYAN='\033[0;36m'
 WHITE='\033[0;37m'
 NC='\033[0m'
+OS_NAME=$(cat /etc/os-release | awk -F '=' '/^PRETTY_NAME/{print $2}' | tr -d '"')
+OS_NAME_LOWER=$(echo "$OS_NAME" | tr '[:upper:]' '[:lower:]')
 clear
 echo
 echo -e "${CYAN}[[[   - Verification systeme -   ]]]${NC}"
@@ -21,22 +23,37 @@ fi
 echo
 echo -e "${CYAN}[[[   - Version de votre OS -   ]]]${NC}"
 echo
-echo "1 - Ubuntu 22.04"
-echo "2 - Alma Linux 8/9 (Version minimale)"
-echo
-read -p "Qu'elle est votre version ?" -n 1 -r osversion
-echo
-echo
-echo -e "${CYAN}[[[   - Préparation et récupération des scripts -   ]]]${NC}"
-echo
-if [[ $osversion = 1 ]]; then
-  script_dir="Ubuntu_22_04"
-  sudo apt-get update
-  sudo apt-get install -y git gparted
+if [[ "$OS_NAME_LOWER" == *"alma"* ]]; then
+   script_dir="AlmaLinux_9"
+   dnf update -y
+   sudo dnf install git parted -y
+   echo "Le système d'exploitation est Alma Linux."
 else
-  script_dir="AlmaLinux_9"
-  dnf update -y
-  sudo dnf install git parted -y
+   if [[ "$OS_NAME_LOWER" == *"ubuntu"* ]]; then
+      script_dir="Ubuntu_22_04"
+      sudo apt-get update
+      sudo apt-get install -y git gparted
+      echo "Le système d'exploitation est Ubuntu."
+   else
+      echo
+      echo "1 - Ubuntu 22.04"
+      echo "2 - Alma Linux 8/9 (Version minimale)"
+      echo
+      read -p "Qu'elle est votre version ?" -n 1 -r osversion
+      echo
+      echo
+      echo -e "${CYAN}[[[   - Préparation et récupération des scripts -   ]]]${NC}"
+      echo
+      if [[ $osversion = 1 ]]; then
+         script_dir="Ubuntu_22_04"
+         sudo apt-get update
+         sudo apt-get install -y git gparted
+      else
+         script_dir="AlmaLinux_9"
+         dnf update -y
+         sudo dnf install git parted -y
+      fi
+   fi
 fi
 echo
 echo -e "${CYAN}[[[   - Récupération de Git -   ]]]${NC}"
