@@ -59,7 +59,7 @@ echo
 echo -e "${CYAN}[[[   - Récupération de Git -   ]]]${NC}"
 echo
 cd $HOME
-git clone https://github.com/firstruner/scripts_devops.git
+git clone https://gitlab.com/firstruner/scripts_devops.git
 cd scripts_devops
 export script_dir
 export osversion
