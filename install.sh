@@ -72,4 +72,5 @@ export MAGENTA
 export CYAN
 export WHITE
 export NC
-bash $HOME/scripts_devops_DockerKubernetes/install.sh
+cd $HOME/scripts_devops_DockerKubernetes
+bash install.sh
